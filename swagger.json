@@ -1,0 +1,246 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "user-api",
+    "description": "user-api",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/cornerStore/",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "paths": {
+    "/items/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nameItem": {
+                  "example": "string"
+                },
+                "price": {
+                  "example": "number"
+                },
+                "numberItems": {
+                  "example": "number"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/items/{id}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nameItem": {
+                  "example": "string"
+                },
+                "price": {
+                  "example": "number"
+                },
+                "numberItems": {
+                  "example": "number"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/cart/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+      {
+        "name": "body",
+        "in": "body",
+        "required": true,
+        "schema": {
+      "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "idItem": {
+              "type": "string",
+              "example": "idItem"
+            },
+            "numberItems": {
+              "type": "integer",
+              "example": 5
+            }
+          }
+    }
+}
+
+  }
+],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/cart/{id}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+          "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "idItem": {
+                  "type": "string",
+                  "example": "idItem"
+                },
+                "numberItems": {
+                  "type": "integer",
+                  "example": 5
+                }
+              }
+        }
+    }
+    
+      }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/cart/CompletePurchase/{id}": {
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}

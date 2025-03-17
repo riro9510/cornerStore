@@ -1,0 +1,88 @@
+#GET to /cornerStore/items local
+
+GET http://localhost:8080/cornerStore/items/ 
+
+
+
+#GET to /cornerStore/items/67c99e39d63334a454a51287 local
+
+GET http://localhost:8080/cornerStore/items/67c99e39d63334a454a51287 
+
+# POST to  http://localhost:8080/cornerStore/items/
+
+POST http://localhost:8080/cornerStore/items/ HTTP/1.1
+Content-Type: application/json
+{
+ "nameItem":"Toilet Paper",
+ "price":2.50,
+ "numberItem":50,
+ }
+
+#PUT TO http://localhost:8080/cornerStore/items/67c99e98d63334a454a5128b
+
+PUT http://localhost:8080/cornerStore/items/67c99e98d63334a454a5128b HTTP/1.1
+Content-Type: application/json
+{
+  "nameItem":"Toilet Paper",
+ "price":3.50,
+ "numberItem":35,
+}
+
+#DELETE TO http://localhost:8080/cornerStore/items/67c99e39d63334a454a51287
+
+DELETE  http://localhost:8080/cornerStore/items/67c99e39d63334a454a51287
+
+###### Carts
+
+#GET to /cornerStore/items local
+
+GET http://localhost:8080/cornerStore/cart/ 
+
+
+
+#GET to /cornerStore/cart/67c99e39d63334a454a51287 local
+
+GET http://localhost:8080/cornerStore/cart/67c99e39d63334a454a51287 
+
+# POST to  http://localhost:8080/cornerStore/cart/
+
+POST http://localhost:8080/cornerStore/cart/ HTTP/1.1
+Content-Type: application/json
+[{
+ "nameItem":"Toilet Paper",
+ "numberItem":2,
+ },]
+
+#PUT TO http://localhost:8080/cornerStore/cart/67c99e98d63334a454a5128b
+
+PUT http://localhost:8080/cornerStore/cart/67c99e98d63334a454a5128b HTTP/1.1
+Content-Type: application/json
+[{
+ "nameItem":"Toilet Paper",
+ "numberItem":1,
+ },
+ {
+ "nameItem":"Milk",
+ "numberItem":1,
+ },
+ ]
+
+#DELETE TO http://localhost:8080/cornerStore/cart/67c99e39d63334a454a51287
+
+DELETE  http://localhost:8080/cornerStore/cart/67c99e39d63334a454a51287
+
+# GET to /professional production render 
+
+GET https://cse341-node-1-phhh.onrender.com/professional 
+
+
+
+#GET to /cornerStore/items production render
+
+GET https://cse341-node-1-phhh.onrender.com/cornerStore/items 
+
+
+
+#GET to /cornerStore/items/67c99e39d63334a454a51287 production render
+
+GET https://cse341-node-1-phhh.onrender.com/contacts/67c99e39d63334a454a51287 
