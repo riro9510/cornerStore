@@ -29,9 +29,14 @@ const setItem = async (req, res, next) => {
         return res.status(400).send(`Validation Error: ${error.details[0].message}`);
     }
 
+    const item = {
+        nameItem: req.body.nameItem,
+        price: parseFloat(req.body.price),
+        numberItems: parseFloat(req.body.numberItems)
+    };
     
     try {
-        const result = await mongoDb.getDb().collection('items').insertOne(req.body);
+        const result = await mongoDb.getDb().collection('items').insertOne(item);
         if (result.acknowledged) {  
             res.status(201).send('Item succesfully added to the Db');  
         } else {
@@ -60,8 +65,13 @@ const editItemById = async(req,res,next)=>{
         if (error) {
             return res.status(400).send(`Validation Error: ${error.details[0].message}`);
         } 
+        const item = {
+            nameItem: req.body.nameItem,
+            price: parseFloat(req.body.price),
+            numberItems: parseFloat(req.body.numberItems)
+        };
         
-    const result = await mongoDb.getDb().collection('items').updateOne({ _id: itemId },{ $set: req.body });  
+    const result = await mongoDb.getDb().collection('items').updateOne({ _id: itemId },{ $set: item });  
     if (result.modifiedCount > 0) {  
         res.status(200).send(`Item ${item.nameItem} successfully updated in the Db`);  
     } else {
