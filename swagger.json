@@ -5,7 +5,7 @@
     "description": "user-api",
     "version": "1.0.0"
   },
-  "host": "cornerstore.onrender.com",
+"host": "cornerstore.onrender.com",
   "basePath": "/cornerStore",
   "schemes": [
     "https",
@@ -23,26 +23,6 @@
       },
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nameItem": {
-                  "example": "string"
-                },
-                "price": {
-                  "example": "number"
-                },
-                "numberItems": {
-                  "example": "number"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "201": {
             "description": "Created"
@@ -62,24 +42,6 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nameItem": {
-                  "example": "string"
-                },
-                "price": {
-                  "example": "number"
-                },
-                "numberItems": {
-                  "example": "number"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -159,7 +121,7 @@
     "/cart/{id}": {
       "put": {
         "description": "",
-        "parameters": [
+       "parameters": [
           {
             "name": "id",
             "in": "path",
