@@ -5,11 +5,10 @@
     "description": "user-api",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
-  "basePath": "/cornerStore/",
+  "host": "cornerstore.onrender.com",
+  "basePath": "/cornerStore",
   "schemes": [
-    "https",
-    "http"
+    "https"
   ],
   "paths": {
     "/items/": {
