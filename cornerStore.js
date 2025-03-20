@@ -12,11 +12,22 @@ const errorCode = (error, res) => {
         res.status(400).send('Bad Request'); 
     }
 };
+const Joi = require('joi');
+
 const itemSchema = Joi.object({
-    nameItem: Joi.string().required(),  
-    price: Joi.number().positive().required(),
-    numberItems: Joi.number().integer().positive().required() 
+    nameItem: Joi.string().min(1).max(255).required(), 
+    price: Joi.number().positive().precision(2).required(),  
+    numberItems: Joi.number().integer().positive().required(), 
+    category: Joi.string().min(1).max(100).required(),  
+    description: Joi.string().max(500).optional(),  
+    expirationDate: Joi.date().greater('now').optional(),  
+    supplier: Joi.string().min(1).max(255).optional(),  
+    stock: Joi.boolean().required(),
+    imageURL: Joi.string().uri().optional(),  
+    weight: Joi.number().positive().precision(2).optional() 
 });
+
+
 const cartItemSchema = Joi.object({
         idItem: Joi.string().required(),  
         numberItems: Joi.number().integer().positive().required() 
@@ -32,8 +43,17 @@ const setItem = async (req, res, next) => {
     const item = {
         nameItem: req.body.nameItem,
         price: parseFloat(req.body.price),
-        numberItems: parseFloat(req.body.numberItems)
+        numberItems: parseInt(req.body.numberItems),
+        category: req.body.category,
+        description: req.body.description || '', 
+        expirationDate: req.body.expirationDate ? new Date(req.body.expirationDate) : null,
+        supplier: req.body.supplier || '', 
+        stock: JSON.parse(req.body.stock),  
+        imageURL: req.body.imageURL || '', 
+        weight: req.body.weight ? parseFloat(req.body.weight) : null 
     };
+    
+    
     
     try {
         const result = await mongoDb.getDb().collection('items').insertOne(item);
@@ -68,8 +88,16 @@ const editItemById = async(req,res,next)=>{
         const item = {
             nameItem: req.body.nameItem,
             price: parseFloat(req.body.price),
-            numberItems: parseFloat(req.body.numberItems)
+            numberItems: parseInt(req.body.numberItems),
+            category: req.body.category,
+            description: req.body.description || '', 
+            expirationDate: req.body.expirationDate ? new Date(req.body.expirationDate) : null,
+            supplier: req.body.supplier || '', 
+            stock: JSON.parse(req.body.stock), 
+            imageURL: req.body.imageURL || '', 
+            weight: req.body.weight ? parseFloat(req.body.weight) : null 
         };
+        
         
     const result = await mongoDb.getDb().collection('items').updateOne({ _id: itemId },{ $set: item });  
     if (result.modifiedCount > 0) {  
@@ -100,7 +128,12 @@ const createCart = async(req,res,next)=>{
         if(error){
             return res.status(400).send(`Validation Error: ${error.details[0].message}`);
         }
-        const result = await mongoDb.getDb().collection('purchases').insertOne({ cartItems: req.body });;
+        const cartItem = {
+            idItem: req.body.idItem,  
+            numberItems: parseInt(req.body.numberItems) 
+        };
+        
+        const result = await mongoDb.getDb().collection('purchases').insertOne({ cartItems: cartItem });;
         if (result.acknowledged) {  
             res.status(201).send('Items successfully added to the Cart');  
         } else {
@@ -130,8 +163,12 @@ const editCart = async(req,res,next)=>{
         if(error){
             return res.status(400).send(`Validation Error: ${error.details[0].message}`);
         }
+        const cartItem = {
+            idItem: req.body.idItem,  
+            numberItems: parseInt(req.body.numberItems) 
+        };
         const result = await mongoDb.getDb().collection('purchases').updateOne({ _id: cartId },  
-            { $set: { cartItems: req.body } } );  
+            { $set: { cartItems: cartItem } } );  
         if (result.modifiedCount > 0) {  
             res.status(200).send(`Cart${cartId} successfully updated in the Db`);  
         } else {

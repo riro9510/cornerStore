@@ -26,7 +26,7 @@ app.use((req,res,next)=>{
   next();
 })
 app.use(swaggerRoutes);
-app.use('/cornerStore', (req, res, next) => {
+app.use('/', (req, res, next) => {
   next();  
 }, cornerRoutes);
 
@@ -50,12 +50,12 @@ passport.deserializeUser((user,done)=>{
   done(null,user);
 })
 
-app.get('/cornerStore',(req,res)=>{res.send(req.session.user !== undefined? `logged in as ${req.session.user.displayName}`:"logged Out")});
+app.get('/',(req,res)=>{res.send(req.session.user !== undefined? `logged in as ${req.session.user.displayName}`:"logged Out")});
 app.get('/github/callback',passport.authenticate('github',{
   failureRedirect: '/api-docs',session:false}),
   (req,res)=>{
     req.session.user = req.user;
-    res.redirect('/cornerStore');
+    res.redirect('/');
   }
 )
 
