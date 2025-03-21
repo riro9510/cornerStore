@@ -127,12 +127,8 @@ const createCart = async(req,res,next)=>{
         if(error){
             return res.status(400).send(`Validation Error: ${error.details[0].message}`);
         }
-        const cartItem = {
-            idItem: req.body.idItem,  
-            numberItems: parseInt(req.body.numberItems) 
-        };
         
-        const result = await mongoDb.getDb().collection('purchases').insertOne({ cartItems: cartItem });;
+        const result = await mongoDb.getDb().collection('purchases').insertOne({ cartItems: req.body });;
         if (result.acknowledged) {  
             res.status(201).send('Items successfully added to the Cart');  
         } else {
@@ -162,12 +158,8 @@ const editCart = async(req,res,next)=>{
         if(error){
             return res.status(400).send(`Validation Error: ${error.details[0].message}`);
         }
-        const cartItem = {
-            idItem: req.body.idItem,  
-            numberItems: parseInt(req.body.numberItems) 
-        };
         const result = await mongoDb.getDb().collection('purchases').updateOne({ _id: cartId },  
-            { $set: { cartItems: cartItem } } );  
+            { $set: { cartItems: req.body } } );  
         if (result.modifiedCount > 0) {  
             res.status(200).send(`Cart${cartId} successfully updated in the Db`);  
         } else {
