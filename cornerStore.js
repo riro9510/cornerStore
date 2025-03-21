@@ -12,7 +12,6 @@ const errorCode = (error, res) => {
         res.status(400).send('Bad Request'); 
     }
 };
-const Joi = require('joi');
 
 const itemSchema = Joi.object({
     nameItem: Joi.string().min(1).max(255).required(), 
