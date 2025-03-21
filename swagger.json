@@ -250,18 +250,21 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-              "idItem": {
-                "type": "string",
-                "example": "12345" 
-              },
-              "numberItems": {
-                "type": "integer",
-                "example": 2  
-              }
+              "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "idItem": {
+                      "type": "string",
+                      "example": "idItem"
+                    },
+                    "numberItems": {
+                      "type": "integer",
+                      "example": 5
+                    }
+                  }
             }
-            }
+        }
           }
         ],
         "responses": {
